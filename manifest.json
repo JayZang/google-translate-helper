@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "icons": {
+  },
+  "description": "本擴充功能為用於 google 翻譯頁面的小幫手",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "小幫手"
+  },
+  "name": "快速開啟AREFLY.COM",
+  "version": "1.0.0",
+  "homepage_url": "https://www.arefly.com/"
+}
