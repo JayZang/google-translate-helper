@@ -3,13 +3,21 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <script src="./js/popup.js"></script>
     <link rel="stylesheet" href="./css/popup.css">
+    <link rel="stylesheet" href="./css/lib/switch.css">
   </head>
   <body>
     <div class="container">
-      <div class="title">功能選項</div>
+      <div class="title">Google 翻譯小幫手</div>
       <div class="features">
         <div class="featureItem">
-          <input type="checkbox" id="autoClear"> 自動清除
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="autoClear">
+            <label class="onoffswitch-label" for="autoClear">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+          <div>自動清除</div>
         </div>
       </div>
     </div>
