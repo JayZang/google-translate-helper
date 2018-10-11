@@ -12,18 +12,25 @@
   "homepage_url": "https://www.google.com",
   "content_scripts": [
     {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [ 
+        "./js/features/selectedQuery/contentScript-any.js"
+      ]
+    },
+    {
       "matches": [
         "https://translate.google.com.tw/*",
         "https://translate.google.com/*"
       ],
       "js": [
         "./js/features/autoClear/contentScript.js",
-        "./js/features/selectedQuery/contentScript.js"
+        "./js/features/selectedQuery/contentScript-google-translate.js"
       ]
     }
   ],
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "tabs"
   ]
 }

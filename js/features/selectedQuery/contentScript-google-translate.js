@@ -8,7 +8,6 @@
   (function init() {
     chrome.storage.sync.get(storageTag, function (items) {
       const status = items[storageTag] || false
-      console.log(status)
     });
 
     codeInjectionToPutTKKonBody()
