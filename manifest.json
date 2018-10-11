@@ -17,8 +17,7 @@
         "https://translate.google.com/*"
       ],
       "js": [
-        "./js/lib/jquery.js",
-        "./js/contentScript.js"
+        "./js/features/autoClear/contentScript.js"
       ]
     }
   ],
