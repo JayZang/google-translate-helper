@@ -1,7 +1,8 @@
-function sendFeatureStatus(feature, status) {
+function sendFeatureStatus(feature, status, data) {
   const content = {
     feature,
-    status
+    status,
+    data
   }
 
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -9,6 +10,15 @@ function sendFeatureStatus(feature, status) {
   })
 }
 
+function getDataFromContent(tabId, eventName, cb) {
+  const content = {
+    eventName
+  }
+
+  chrome.tabs.sendMessage(tabId, content, cb);
+}
+
 export default {
-  sendFeatureStatus
+  sendFeatureStatus,
+  getDataFromContent
 }
