@@ -12,7 +12,7 @@
 > 此擴充套件並未發布至 Google 線上應用程式商店，因此需自行設置載入至 chrome。
 
 1. 下載此擴充套件(下方兩種方式則其一)：  
-  a. 點選此頁面之 `Clone or download` 按鍵下載後解壓縮
+  a. 點選此頁面之 `Clone or download` 按鍵下載後解壓縮
   ![clone-or-download](./asset/clone-or-download.png)  
   b. 使用 `git` 指令
   ```bash
