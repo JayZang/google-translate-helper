@@ -37,5 +37,9 @@
 }
 
 #tranlate-card .translate-result-container {
-  font-size: 18px;
+  font-size: 18px;    white-space: pre-line;
+}
+
+#tranlate-card .translate-result-txt {
+  white-space: pre-line;
 }

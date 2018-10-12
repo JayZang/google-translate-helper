@@ -24,17 +24,19 @@
       }
 
       if (!window.calcHash) {
-
+        return
       }
 
       const query = message.para.query
       const TKK = document.getElementsByTagName('body')[0].getAttribute('tkk')
       const tk = window.calcHash(query, TKK)
 
+      console.log(`Query: ${query}`)
+
       // 取得翻譯內容
       $.ajax({
         type: "GET",
-        url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${query}`,
+        url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${encodeURI(query)}`,
         success: (data) => {
           sendResponse({ data })
         }
