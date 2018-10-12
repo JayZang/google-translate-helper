@@ -13,16 +13,25 @@ function sendFeatureStatus(feature, status) {
 }
 
 // 向 content script 取得資料
-function getDataFromContent(tabId, eventName, para, cb) {
+function getDataFromContent(tabId, event, para, cb) {
   const content = {
-    eventName,
+    event,
     para
   }
 
   chrome.tabs.sendMessage(tabId, content, cb);
 }
 
+function eventHandlerFromContent(event, cb) {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (event === message.event) {
+      cb(message.content)
+    }
+  })
+}
+
 export default {
   sendFeatureStatus,
-  getDataFromContent
+  getDataFromContent,
+  eventHandlerFromContent
 }

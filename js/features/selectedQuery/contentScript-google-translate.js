@@ -1,16 +1,11 @@
 (function () {
-  const tranlateInputId = 'source'
   const featureName = 'selectedQuery'
-  const getTkkEventName = 'getTKK'
-  const storageTag = featureName;
+  const translateEventName = 'query';
 
   // 動作初始，造訪 Google 翻譯頁面時初始
   (function init() {
-    chrome.storage.sync.get(storageTag, function (items) {
-      const status = items[storageTag] || false
-    });
-
     codeInjectionToPutTKKonBody()
+    setEventListener()
   })()
 
   // content script 執行環境無法得到 page variable，需注入程式到 page 環境執行將 TKK 變數放置 body 標籤
@@ -20,11 +15,33 @@
     document.getElementsByTagName('body')[0].appendChild(script)
   }
 
-  /* 監聽來自小視窗的動作指令 */
-  chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.eventName === getTkkEventName) {
-      sendResponse(document.getElementsByTagName('body')[0].getAttribute('tkk'))
-    }
-  });
+  /* 監聽來自 popup dashboard 的動作指令 */
+  function setEventListener() {
+    // 翻譯事件
+    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+      if (message.event !== translateEventName) {
+        return
+      }
+
+      if (!window.calcHash) {
+
+      }
+
+      const query = message.para.query
+      const TKK = document.getElementsByTagName('body')[0].getAttribute('tkk')
+      const tk = window.calcHash(query, TKK)
+
+      console.log(message.para.query)
+      console.log(window.calcHash)
+      console.log(tk)
+
+      // 取得翻譯內容
+      $.ajax({
+        type: "GET",
+        url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${query}`,
+        success: (e) => console.log(e)
+      })
+    });
+  }
 })()
 

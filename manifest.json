@@ -23,11 +23,19 @@
         "https://translate.google.com/*"
       ],
       "js": [
+        "./js/lib/jquery.js",
+        "./js/core/tkHashFunc.js",
         "./js/features/autoClear/contentScript.js",
         "./js/features/selectedQuery/contentScript-google-translate.js"
       ]
     }
   ],
+  "background": {
+    "scripts": [
+      "./js/features/selectedQuery/background.js"
+    ],
+    "persistent": false
+  },
   "permissions": [
     "activeTab",
     "storage",
