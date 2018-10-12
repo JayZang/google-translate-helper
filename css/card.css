@@ -1,0 +1,41 @@
+#tranlate-card {
+  max-width: 600px;
+  min-width: 330px;
+  background-color: #2196F3;
+  color: white;
+  font-weight: 600;
+  position: fixed;
+  z-index: 99999;
+  padding: 19px 25px;
+  right: -100%;
+  top: 50%;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.6);
+  transition: 600ms;
+  text-align: left;
+}
+
+#tranlate-card .closeBtn {
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  right: 0;
+  top: 0;
+  margin: 13px;
+  cursor: pointer;
+}
+
+#tranlate-card.show {
+  right: 0;
+}
+
+#tranlate-card .translate-container .translate-title{
+  font-size: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+  margin-bottom: 10px;
+  cursor: move;
+}
+
+#tranlate-card .translate-result-container {
+  font-size: 18px;
+}

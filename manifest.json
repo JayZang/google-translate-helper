@@ -14,6 +14,8 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "js": [ 
+        "./js/lib/jquery.js",
+        "./js/core/card.js",
         "./js/features/selectedQuery/contentScript-any.js"
       ]
     },
@@ -36,6 +38,9 @@
     ],
     "persistent": false
   },
+  "web_accessible_resources": [
+    "css/card.css"
+  ],
   "permissions": [
     "activeTab",
     "storage",
