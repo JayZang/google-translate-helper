@@ -27,7 +27,9 @@
         event: 'stringToTranslate',
         content: selectedString
       }
-      chrome.runtime.sendMessage(message)
+      chrome.runtime.sendMessage(message, (res) => {
+        console.log(res)
+      })
     }
   }
 

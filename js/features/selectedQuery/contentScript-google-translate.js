@@ -31,16 +31,17 @@
       const TKK = document.getElementsByTagName('body')[0].getAttribute('tkk')
       const tk = window.calcHash(query, TKK)
 
-      console.log(message.para.query)
-      console.log(window.calcHash)
-      console.log(tk)
-
       // 取得翻譯內容
       $.ajax({
         type: "GET",
         url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${query}`,
-        success: (e) => console.log(e)
+        success: (data) => {
+          sendResponse({ data })
+        }
       })
+
+      // 返回 true 才可以異步返回資料
+      return true
     });
   }
 })()
