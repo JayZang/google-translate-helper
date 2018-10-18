@@ -36,7 +36,7 @@
       // 取得翻譯內容
       $.ajax({
         type: "GET",
-        url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${encodeURI(query)}`,
+        url: `https://translate.google.com.tw/translate_a/t?client=t&sl=en&tl=zh-TW&hl=zh-TW&v=1.0&source=is&tk=${tk}&q=${encodeURIComponent(query)}`,
         success: (data) => {
           sendResponse({ data })
         }
