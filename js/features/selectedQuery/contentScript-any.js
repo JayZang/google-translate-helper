@@ -32,31 +32,62 @@
 
   // 按鍵事件處理器
   function keyDownEventHandler({ keyCode }) {
-    if (keyCode === 18) {
-      const selectedString = getselecttext().toString().trim()
+    switch(keyCode) {
+      // ctrl , 反白字串發音
+      case 17:
+        speakString()
+        break
 
-      if (!selectedString) {
-        return
-      }
+      // alt , 反白字串翻譯
+      case 18:
+        stringToTranslate()
+        break
 
-      const message = {
-        event: 'stringToTranslate',
-        content: selectedString
-      }
-      chrome.runtime.sendMessage(message, (result) => {
+      // esc , 隱藏翻譯卡
+      case 27:
         if (!window.Card) {
           return
         }
 
-        window.Card.show(selectedString, result)
-      })
-    } else if (keyCode === 27) {
+        window.Card.hide()
+        break
+    }
+  }
+
+  // 反白字串發音
+  function speakString() {
+    const selectedString = getselecttext()
+
+    if (!selectedString) {
+      return
+    }
+
+    const message = {
+      event: 'speakString',
+      content: selectedString
+    }
+    chrome.runtime.sendMessage(message, null)
+  }
+
+  // 反白字串翻譯
+  function stringToTranslate() {
+    const selectedString = getselecttext()
+
+    if (!selectedString) {
+      return
+    }
+
+    const message = {
+      event: 'stringToTranslate',
+      content: selectedString
+    }
+    chrome.runtime.sendMessage(message, (result) => {
       if (!window.Card) {
         return
       }
 
-      window.Card.hide()
-    }
+      window.Card.show(selectedString, result)
+    })
   }
 
   // 取得反白字串
@@ -70,6 +101,6 @@
       t = window.document.selection.createRange().text
     }
 
-    return t
+    return t.toString().trim()
   }
 })()

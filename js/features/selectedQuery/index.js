@@ -1,5 +1,4 @@
 import { feature } from '../../core/feature.js'
-import msgController from '../../core/msgController.js'
 
 const selectedQuery = new feature('selectedQuery')
 const queryURL = ['https://translate.google.com.tw/*', 'https://translate.google.com/*']

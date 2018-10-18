@@ -1,23 +1,42 @@
 const queryURL = ['https://translate.google.com.tw/*', 'https://translate.google.com/*']
 
-chrome.runtime.onInstalled.addListener(function () {
   // 透過 background 當作橋樑使所有頁面與 google翻譯做溝通
-  setEventHandlerFromContent('stringToTranslate', (content, sendResponse) => {
-    // 查詢是否有 google 翻譯頁面
-    chrome.tabs.query({ url: queryURL }, (tabs) => {
-      if (!tabs.length) {
-        alert('Opps, 發生了些錯誤，請重新開啟 "選取搜尋" 開關')
-        return
-      }
-
-      getDataFromContent(tabs[0].id, 'query', { query: content }, (res) => {
-        sendResponse(res)
+chrome.runtime.onInstalled.addListener(function () {
+  setEventHandlerFromContent('stringToTranslate', async (content, sendResponse) => {
+    var tabs = await checkGooglePageExist()
+      .catch((err) => {
+        alert(err)
       })
+
+    eventTrigger(tabs[0].id, 'query', { query: content }, (res) => {
+      sendResponse(res)
     })
+  })
+
+  setEventHandlerFromContent('speakString', async (content) => {
+    var tabs = await checkGooglePageExist()
+      .catch((err) => {
+        alert(err)
+      })
+
+    eventTrigger(tabs[0].id, 'speak', { query: content }, null)
   })
 })
 
-function getDataFromContent(tabId, event, para, cb) {
+// 查詢是否有 google 翻譯頁面，並返回位於哪一個tab
+function checkGooglePageExist() {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.query({ url: queryURL }, (tabs) => {
+      if (!tabs.length) {
+        reject('Opps, 發生了些錯誤，請重新開啟 "選取搜尋" 開關')
+      }
+
+      resolve(tabs)
+    })
+  })
+}
+
+function eventTrigger(tabId, event, para, cb) {
   const content = {
     event,
     para
