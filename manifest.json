@@ -15,8 +15,9 @@
       "matches": ["http://*/*", "https://*/*"],
       "js": [ 
         "./js/lib/jquery.js",
-        "./js/core/card.js",
-        "./js/features/selectedQuery/contentScript-any.js"
+        "./js/core/content-script/card.js",
+        "./js/features/selectedQuery/contentScript-any.js",
+        "./js/features/selectedSpeak/contentScript-any.js"
       ]
     },
     {
@@ -26,17 +27,20 @@
       ],
       "js": [
         "./js/lib/jquery.js",
-        "./js/core/tkHashFunc.js",
+        "./js/core/content-script/tkHashFunc.js",
+        "./js/core/content-script/tkkToBodyElement.js",
         "./js/features/autoClear/contentScript.js",
-        "./js/features/selectedQuery/contentScript-google-translate.js"
+        "./js/features/selectedQuery/contentScript-google-translate.js",
+        "./js/features/selectedSpeak/contentScript-google-translate.js"
       ]
     }
   ],
   "background": {
     "scripts": [
-      "./js/features/selectedQuery/background.js"
-    ],
-    "persistent": false
+      "./js/core/background-script/funcDefine.js",
+      "./js/features/selectedQuery/background.js",
+      "./js/features/selectedSpeak/background.js"
+    ]
   },
   "web_accessible_resources": [
     "css/card.css"

@@ -1,5 +1,5 @@
 (function() {
-  const feature = 'selectedQuery'
+  const feature = 'selectedSpeak'
   let featureOn = false;
 
   (function init(){
@@ -8,20 +8,7 @@
     });
 
     eventSetter()
-    initCard()
   })()
-
-  /*
-  初始化翻譯資訊卡
-  */
-  function initCard() {
-    if (!window.Card) {
-      return
-    }
-
-    window.Card.init()
-    window.Card.injectCss()
-  }
 
   /*
   設置事件監聽器
@@ -43,26 +30,17 @@
   */
   function keyDownEventHandler({ keyCode }) {
     switch(keyCode) {
-      // alt , 反白字串翻譯
-      case 18:
-        featureOn && stringToTranslate()
-        break
-
-      // esc , 隱藏翻譯卡
-      case 27:
-        if (!featureOn || !window.Card ) {
-          return
-        }
-
-        window.Card.hide()
+      // ctrl , 反白字串發音
+      case 17:
+        featureOn && speakString()
         break
     }
   }
 
   /*
-  反白字串翻譯
+  反白字串發音
   */
-  function stringToTranslate() {
+  function speakString() {
     const selectedString = getselecttext()
 
     if (!selectedString) {
@@ -70,16 +48,11 @@
     }
 
     const message = {
-      event: 'stringToTranslate',
+      event: 'speakString',
       content: selectedString
     }
-    chrome.runtime.sendMessage(message, (result) => {
-      if (!window.Card) {
-        return
-      }
-
-      window.Card.show(selectedString, result)
-    })
+    chrome.runtime.sendMessage(message, null)
+    console.log('message send')
   }
 
   /*
