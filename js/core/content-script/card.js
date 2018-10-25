@@ -111,7 +111,7 @@
     // 取得模板樣式
     getTempalte(srcTxt, result) {
       return `
-    <div id="${this.domId}">
+    <div id="${this.domId}" style="visibility: hidden">
       <div class="translate-container">
         <div class="closeBtn">╳</div>
         <div class="translate-title">Google 翻譯小幫手</div>
@@ -130,7 +130,7 @@
       link.href = chrome.extension.getURL("css/card.css");
       link.type = "text/css";
       link.rel = "stylesheet";
-      document.getElementsByTagName("head")[0].appendChild(link);
+      document.getElementsByTagName("body")[0].appendChild(link);
     }
   }
 })(window)
