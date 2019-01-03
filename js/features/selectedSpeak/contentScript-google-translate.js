@@ -16,7 +16,7 @@
       if (message.event !== speakEventName) {
         return
       }
-console.log(123)
+
       const query = message.para.query
       const tk = getTkValue(query)
       if (tk === -1) {

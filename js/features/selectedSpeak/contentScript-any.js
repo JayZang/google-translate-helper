@@ -52,7 +52,6 @@
       content: selectedString
     }
     chrome.runtime.sendMessage(message, null)
-    console.log('message send')
   }
 
   /*
